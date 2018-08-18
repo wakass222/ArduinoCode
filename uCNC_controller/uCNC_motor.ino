@@ -75,7 +75,7 @@ void initMotors()
 
   home();
   
-  analogWrite(D10, servoPosMax);
+  analogWrite(10, servoPosMax);
 }
 
 void home()
@@ -147,14 +147,14 @@ void penDown()
 {
   delay(30);
   digitalWrite(led, HIGH);
-  analogWrite(D10, servoPosMin);
+  analogWrite(10, servoPosMin);
   delay(200);
 }
 
 void penUp()
 {
   digitalWrite(led, LOW);
-  analogWrite(D10, servoPosMax);
+  analogWrite(10, servoPosMax);
   delay(200);
 }
 
@@ -165,7 +165,7 @@ void updateServo(int servoPos)
   if (servoPos<servoPosMin)
     servoPos = servoPosMin;
   
-  analogWrite(D10, servoPos);
+  analogWrite(10, servoPos);
 }
 
 void servoZ()
@@ -224,7 +224,7 @@ void updateMotorCodes()
   
   switch(motorMode) {
   case 0:
-    analogWrite(D10, spindleSpeed);
+    analogWrite(10, spindleSpeed);
     digitalWrite(led,(spindle == 1) ? HIGH : LOW);
     break;
   case 2:
