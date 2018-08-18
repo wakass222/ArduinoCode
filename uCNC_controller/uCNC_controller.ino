@@ -17,32 +17,30 @@
  *   along with uCNC_controller.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <Servo.h>
 #include <Stepper.h>
 
 /* Version of this progam */
 float uCNC_Version = 1.0;
+
+#define threadPitch 1.5
 
 /* Development functions - broken code*/
 //#define BUILTIN 1
 //#define BROKEN 1
 
 /* Conversion factor of steps per millimeter */
-float stepsPerMillimeter_X = 200 / 17.1;
-float stepsPerMillimeter_Y = -200 / 17.1;
-float stepsPerMillimeter_Z = 200 / 17.1;
+const float stepsPerMillimeter_X = 2048 / threadPitch;
+const float stepsPerMillimeter_Y = -2048 / threadPitch;
+const float stepsPerMillimeter_Z = 2048 / threadPitch;
 
 /* Unit conversion factor */
 float conversionFactor = 1;  // 1 for mm 25.4 for inches
 
 /* Stepper library initialization */
-const int stepsPerRevolution = 200;  // change this to fit the number of steps per revolution
-Stepper myStepper1(stepsPerRevolution, 8,9,10,11);
-Stepper myStepper2(stepsPerRevolution, 4,5,6,7);            
+const int stepsPerRevolution = 2048;  // change this to fit the number of steps per revolution
+Stepper myStepper1(stepsPerRevolution, D2,D3,D4,D5);
+Stepper myStepper2(stepsPerRevolution, D6,D7,D8,D9);            
 Stepper myStepper3(stepsPerRevolution, 17,16,19,18);
-
-/* Servo functions and limits */
-Servo myServo;
 
 int servoPosMax=83;
 int servoPosMin=70;
@@ -73,6 +71,9 @@ int spindleSpeed = 0;
 
 int led = 13;
 
+const int switchOne = A0;
+const int switchTwo = A1;
+
 #define COMMAND_SIZE 128
 uint8_t command_line[COMMAND_SIZE];
 uint8_t sin_count=0;
@@ -87,10 +88,13 @@ void setup() {
   // LED (Laser output)
   pinMode(led, OUTPUT);
   // General pupose (coolant 1) output
-  pinMode(2, OUTPUT);
+  //pinMode(2, OUTPUT);
   // General pupose (coolant 2) output
-  pinMode(3, OUTPUT);
+  //pinMode(3, OUTPUT);
   
+  pinMode(switchOne, INPUT_PULLUP);
+  pinMode(switchTwo, INPUT_PULLUP);
+
   /* Init the steppers and servo */
   initMotors();
 }

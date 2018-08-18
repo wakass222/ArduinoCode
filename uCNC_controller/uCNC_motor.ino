@@ -73,14 +73,23 @@ void initMotors()
   myStepper2.setSpeed(MAX_SPEED);
   myStepper3.setSpeed(MAX_SPEED);
 
-  myServo.attach(12);
-  myServo.write(servoPosMax);
+  home();
+  
+  analogWrite(D10, servoPosMax);
+}
 
-  myStepper1.step(-1400);
-  myStepper2.step(-1500);
+void home()
+{
+  while(digitalRead(switchOne)) {
+    myStepper1.step(-1);
+  }
 
-  myStepper2.step(400);
-  myStepper1.step(75);
+  while(digitalRead(switchTwo)) {
+    myStepper2.step(-1);
+  }
+
+  myStepper1.step(100);
+  myStepper2.step(100);
 }
 
 void setXYSpeed(float speed)
@@ -138,15 +147,15 @@ void penDown()
 {
   delay(30);
   digitalWrite(led, HIGH);
-  myServo.write(servoPosMin);
-  delay(100);
+  analogWrite(D10, servoPosMin);
+  delay(200);
 }
 
 void penUp()
 {
   digitalWrite(led, LOW);
-  myServo.write(servoPosMax);
-  delay(100);
+  analogWrite(D10, servoPosMax);
+  delay(200);
 }
 
 void updateServo(int servoPos)
@@ -156,7 +165,7 @@ void updateServo(int servoPos)
   if (servoPos<servoPosMin)
     servoPos = servoPosMin;
   
-  myServo.write(servoPos);
+  analogWrite(D10, servoPos);
 }
 
 void servoZ()
@@ -215,7 +224,7 @@ void updateMotorCodes()
   
   switch(motorMode) {
   case 0:
-    myServo.write(spindleSpeed);
+    analogWrite(D10, spindleSpeed);
     digitalWrite(led,(spindle == 1) ? HIGH : LOW);
     break;
   case 2:

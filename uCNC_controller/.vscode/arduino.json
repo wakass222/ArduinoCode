@@ -1,0 +1,4 @@
+{
+    "sketch": "uCNC_controller.ino",
+    "board": "arduino:avr:uno"
+}
