@@ -62,7 +62,7 @@
               The functions are grouped into those using the native steps
               values or the measurement (float) values. */
 
-#define MAX_SPEED 60
+#define MAX_SPEED 5
 #define DRILL_SPEED 0.1
 
 float motorSpeed = MAX_SPEED;

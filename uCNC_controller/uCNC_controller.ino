@@ -20,9 +20,9 @@
 #include <Stepper.h>
 
 /* Version of this progam */
-float uCNC_Version = 1.0;
+float uCNC_Version = 1.1;
 
-#define threadPitch 1.5
+#define threadPitch 1.25
 
 /* Development functions - broken code*/
 //#define BUILTIN 1
