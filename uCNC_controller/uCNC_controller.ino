@@ -48,7 +48,7 @@ int servoToolInc=10;
 float servoPosZfactor=1.0;
 
 /* Mode selector for the motors (see documentation) */
-int   motorMode = 0;
+int   motorMode = 1;
 
 /* X,Y,Z in absolute steps position */
 int X = 0;
