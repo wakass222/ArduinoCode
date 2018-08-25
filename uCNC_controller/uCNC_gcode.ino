@@ -89,7 +89,8 @@ void process_command(uint8_t *command_string)
       conversionFactor = 1;  // 1 for mm 25.4 for inches      
       break;
     case 28: //go home.
-      movePosXYZ (0, 0, 0, 0);
+      //movePosXYZ (0, 0, 0, 0);
+      home();
       break;
     case 30://go home via an intermediate point.
       setXYZ(&fp);
