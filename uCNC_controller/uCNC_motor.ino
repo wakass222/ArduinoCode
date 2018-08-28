@@ -80,6 +80,7 @@ void initMotors()
 
 void home()
 {
+  //Penis
   while(digitalRead(switchOne)) {
     myStepper1.step(-1);
   }
@@ -88,8 +89,8 @@ void home()
     myStepper2.step(-1);
   }
 
-  myStepper1.step(100);
-  myStepper2.step(100);
+  myStepper1.step(2048);
+  myStepper2.step(2048);
 }
 
 void setXYSpeed(float speed)
