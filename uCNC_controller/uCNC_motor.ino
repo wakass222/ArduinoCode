@@ -148,14 +148,14 @@ void penDown()
   delay(30);
   digitalWrite(led, HIGH);
   analogWrite(10, servoPosMin);
-  delay(400);
+  delay(200);
 }
 
 void penUp()
 {
   digitalWrite(led, LOW);
   analogWrite(10, servoPosMax);
-  delay(400);
+  delay(200);
 }
 
 void updateServo(int servoPos)

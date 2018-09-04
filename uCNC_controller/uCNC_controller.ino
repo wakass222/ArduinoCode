@@ -39,7 +39,9 @@ float conversionFactor = 1;  // 1 for mm 25.4 for inches
 /* Stepper library initialization */
 const int stepsPerRevolution = 2048;  // change this to fit the number of steps per revolution
 Stepper myStepper1(stepsPerRevolution, 2,3,4,5);
-Stepper myStepper2(stepsPerRevolution, 6,7,8,9);            
+Stepper myStepper2(stepsPerRevolution, 6,7,8,9);
+
+//Not being used
 Stepper myStepper3(stepsPerRevolution, 17,16,19,18);
 
 int servoPosMax=83;
