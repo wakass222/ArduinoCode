@@ -62,7 +62,7 @@
               The functions are grouped into those using the native steps
               values or the measurement (float) values. */
 
-#define MAX_SPEED 5
+#define MAX_SPEED 10
 #define DRILL_SPEED 0.1
 
 float motorSpeed = MAX_SPEED;
@@ -148,14 +148,14 @@ void penDown()
   delay(30);
   digitalWrite(led, HIGH);
   analogWrite(10, servoPosMin);
-  delay(200);
+  delay(400);
 }
 
 void penUp()
 {
   digitalWrite(led, LOW);
   analogWrite(10, servoPosMax);
-  delay(200);
+  delay(400);
 }
 
 void updateServo(int servoPos)
