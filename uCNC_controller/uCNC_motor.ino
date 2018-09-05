@@ -71,7 +71,7 @@ void initMotors()
 {
   myStepper1.setSpeed(MAX_SPEED);
   myStepper2.setSpeed(MAX_SPEED);
-  myStepper3.setSpeed(MAX_SPEED);
+  //myStepper3.setSpeed(MAX_SPEED);
 
   home();
   
@@ -106,7 +106,7 @@ void setXYSpeed(float speed)
   
   myStepper1.setSpeed((int)speed);
   myStepper2.setSpeed((int)speed);
-  myStepper3.setSpeed((int)speed);
+  //myStepper3.setSpeed((int)speed);
   
 }
 
@@ -129,8 +129,8 @@ void moveY(int dY)
   case 3:
     int i;
     for (i=0;i<abs(dY);i++) {
-      myStepper3.setSpeed(MAX_SPEED); //stepper3 is always driven with stepper2
-      myStepper3.step((dY < 1) ? -1 : 1);
+      //myStepper3.setSpeed(MAX_SPEED); //stepper3 is always driven with stepper2
+      //myStepper3.step((dY < 1) ? -1 : 1);
       myStepper2.step((dY < 1) ? -1 : 1);
     }
     break;
@@ -180,8 +180,8 @@ void moveZ(int dZ)
 
   switch(motorMode) {
   case 0:
-    myStepper3.setSpeed((int)motorSpeed); //stepper3 is always driven with stepper2
-    myStepper3.step(dZ);
+    //myStepper3.setSpeed((int)motorSpeed); //stepper3 is always driven with stepper2
+    //myStepper3.step(dZ);
     break;
   case 1:
     digitalWrite(led,(posZ < 1) ? HIGH : LOW);
@@ -211,10 +211,10 @@ void powerdown()
   digitalWrite(10,LOW);
   digitalWrite(11,LOW);
   // Stepper 3  
-  digitalWrite(16,LOW);
-  digitalWrite(17,LOW);
-  digitalWrite(18,LOW);
-  digitalWrite(19,LOW);
+  //digitalWrite(16,LOW);
+  //digitalWrite(17,LOW);
+  //digitalWrite(18,LOW);
+  //digitalWrite(19,LOW);
 }
 
 void updateMotorCodes()

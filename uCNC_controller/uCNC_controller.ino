@@ -42,7 +42,7 @@ Stepper myStepper1(stepsPerRevolution, 2,3,4,5);
 Stepper myStepper2(stepsPerRevolution, 6,7,8,9);
 
 //Not being used
-Stepper myStepper3(stepsPerRevolution, 17,16,19,18);
+//Stepper myStepper3(stepsPerRevolution, 17,16,19,18);
 
 int servoPosMax=83;
 int servoPosMin=70;
@@ -94,6 +94,7 @@ void setup() {
   // General pupose (coolant 2) output
   //pinMode(3, OUTPUT);
   
+  //Setup the pins
   pinMode(switchOne, INPUT_PULLUP);
   pinMode(switchTwo, INPUT_PULLUP);
 
