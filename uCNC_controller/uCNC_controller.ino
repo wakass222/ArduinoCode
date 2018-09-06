@@ -18,6 +18,9 @@
  */
 
 #include <Stepper.h>
+#include <Servo.h>
+
+Servo myServo;
 
 /* Version of this progam */
 float uCNC_Version = 1.1;
@@ -44,8 +47,8 @@ Stepper myStepper2(stepsPerRevolution, 6,7,8,9);
 //Not being used
 //Stepper myStepper3(stepsPerRevolution, 17,16,19,18);
 
-int servoPosMax=83;
-int servoPosMin=70;
+int servoPosMax=60;
+int servoPosMin=25;
 int servoToolInc=10;
 float servoPosZfactor=1.0;
 

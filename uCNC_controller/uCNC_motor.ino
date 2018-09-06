@@ -73,13 +73,16 @@ void initMotors()
   myStepper2.setSpeed(MAX_SPEED);
   //myStepper3.setSpeed(MAX_SPEED);
 
+  myServo.attach(10);
+  myServo.write(servoPosMin);
+
   home();
-  
-  analogWrite(10, servoPosMax);
 }
 
 void home()
 {
+  myServo.write(servoPosMin);
+
   while(digitalRead(switchOne)) {
     myStepper1.step(-1);
   }
@@ -147,15 +150,16 @@ void penDown()
 {
   delay(30);
   digitalWrite(led, HIGH);
-  analogWrite(10, servoPosMin);
-  delay(200);
+  myServo.write(servoPosMax;
+  delay(250);
 }
 
 void penUp()
 {
+  delay(30);
   digitalWrite(led, LOW);
-  analogWrite(10, servoPosMax);
-  delay(200);
+  myServo.write(servoPosMin);
+  delay(250);
 }
 
 void updateServo(int servoPos)
