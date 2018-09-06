@@ -228,7 +228,7 @@ void updateMotorCodes()
   
   switch(motorMode) {
   case 0:
-    analogWrite(10, spindleSpeed);
+    myServo.write(spindleSpeed);
     digitalWrite(led,(spindle == 1) ? HIGH : LOW);
     break;
   case 2:
