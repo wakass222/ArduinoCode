@@ -169,7 +169,7 @@ void updateServo(int servoPos)
   if (servoPos<servoPosMin)
     servoPos = servoPosMin;
   
-  analogWrite(10, servoPos);
+  myServo.write(servoPos);
 }
 
 void servoZ()
