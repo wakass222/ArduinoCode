@@ -81,13 +81,11 @@ void initMotors()
 
 void home()
 {
-  myServo.write(servoPosMin);
-
-  while(digitalRead(switchOne)) {
+  while(!digitalRead(switchOne)) {
     myStepper1.step(-1);
   }
 
-  while(digitalRead(switchTwo)) {
+  while(!digitalRead(switchTwo)) {
     myStepper2.step(-1);
   }
 
@@ -150,7 +148,7 @@ void penDown()
 {
   delay(30);
   digitalWrite(led, HIGH);
-  myServo.write(servoPosMax;
+  myServo.write(servoPosMax);
   delay(250);
 }
 

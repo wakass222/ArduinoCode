@@ -41,13 +41,13 @@ float conversionFactor = 1;  // 1 for mm 25.4 for inches
 
 /* Stepper library initialization */
 const int stepsPerRevolution = 2048;  // change this to fit the number of steps per revolution
-Stepper myStepper1(stepsPerRevolution, 2,3,4,5);
-Stepper myStepper2(stepsPerRevolution, 6,7,8,9);
+Stepper myStepper1(stepsPerRevolution, 4,5,2,3);
+Stepper myStepper2(stepsPerRevolution, 9,8,7,6);
 
 //Not being used
 //Stepper myStepper3(stepsPerRevolution, 17,16,19,18);
 
-int servoPosMax=60;
+int servoPosMax=55;
 int servoPosMin=25;
 int servoToolInc=10;
 float servoPosZfactor=1.0;
@@ -88,7 +88,7 @@ uint8_t asleep = 0;
 
 void setup() {
   Serial.begin(9600);
-  Serial.println("uCNC_controller (compatible: Grbl v0.81, Repetier 0.80, E3D v1.00)");
+  Serial.println("Grbl 0.81");
   
   // LED (Laser output)
   pinMode(led, OUTPUT);
@@ -113,8 +113,6 @@ void clear_command_string() {
 
 void loop() {
   uint8_t c;
-  
-  Serial.println("ready");
 
   while (true) {
     //read in characters if we got them.
