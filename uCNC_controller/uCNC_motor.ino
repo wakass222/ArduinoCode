@@ -62,7 +62,7 @@
               The functions are grouped into those using the native steps
               values or the measurement (float) values. */
 
-#define MAX_SPEED 4
+#define MAX_SPEED 10
 #define DRILL_SPEED 0.1
 
 float motorSpeed = MAX_SPEED;
@@ -114,13 +114,13 @@ void setXYSpeed(float speed)
   
 }
 
-void moveX(int dX)
+void moveX(long dX)
 {
   X = X + dX;
   myStepper1.step(dX);
 }
 
-void moveY(int dY)
+void moveY(long dY)
 {
   Y = Y + dY;
   
@@ -163,7 +163,7 @@ void penUp()
   delay(250);
 }
 
-void updateServo(int servoPos)
+void updateServo(long servoPos)
 {
   if (servoPos>servoPosMax)
     servoPos = servoPosMax;
@@ -179,7 +179,7 @@ void servoZ()
   updateServo(servoPos);
 }
 
-void moveZ(int dZ)
+void moveZ(long dZ)
 {
   Z = Z + dZ;
 
@@ -247,23 +247,23 @@ void updateToolCodes()
 
 /* No direct IO below this line */
 
-void moveToX(int pX)
+void moveToX(long pX)
 {
   moveX(pX - X);
 }
 
-void moveToY(int pY)
+void moveToY(long pY)
 {
   moveY(pY - Y);
 }
 
-void moveToXY(int pX, int pY)
+void moveToXY(long pX, long pY)
 {
   moveX(pX - X);
   moveY(pY - Y);
 }
 
-void moveToXYZ(int pX, int pY, int pZ)
+void moveToXYZ(long pX, long pY, long pZ)
 {
   if (pX - X)
     moveX(pX - X);
@@ -290,14 +290,14 @@ void drill()
   moveToXYZ(X,Y,oZ);
 }
 
-int sgn(int value)
+long sgn(long value)
 {
   return value < 0 ? -1 : value > 0;
 }
 
-void lineXYZ(int x2, int y2, int z2)
+void lineXYZ(long x2, long y2, long z2)
 {
-  int n, deltax, deltay, deltaz, sgndeltax, sgndeltay, sgndeltaz, deltaxabs, deltayabs, deltazabs, x, y, z, drawx, drawy, drawz;
+  long n, deltax, deltay, deltaz, sgndeltax, sgndeltay, sgndeltaz, deltaxabs, deltayabs, deltazabs, x, y, z, drawx, drawy, drawz;
 
   deltax = x2 - X;
   deltay = y2 - Y;
@@ -308,6 +308,7 @@ void lineXYZ(int x2, int y2, int z2)
   sgndeltax = sgn(deltax);
   sgndeltay = sgn(deltay);
   sgndeltaz = sgn(deltaz);
+  //Divide by 2
   x = deltayabs >> 1;
   y = deltaxabs >> 1;
   z = deltazabs >> 1;
@@ -330,8 +331,9 @@ void lineXYZ(int x2, int y2, int z2)
         z -= deltaxabs;
         drawz += sgndeltaz;
       }
-
       drawx += sgndeltax;
+      //Serial.println("Progress: " + String(deltaxabs) + "/" + String(n));
+      //Serial.println("Drawing: " + String(drawx) + ":" + String(drawy) + ":" + String(drawz));
       moveToXYZ(drawx, drawy, drawz);
     }
     return;
@@ -339,6 +341,7 @@ void lineXYZ(int x2, int y2, int z2)
   // dY is biggest
   if(deltayabs >= deltaxabs && deltayabs >= deltazabs){
     for(n = 0; n < deltayabs; n++){
+      //Serial.println("Delta to move: " + String(deltaxabs) + " Current loop index: " + String(n));
       x += deltaxabs;
       if(x >= deltayabs){
         x -= deltayabs;
@@ -350,6 +353,8 @@ void lineXYZ(int x2, int y2, int z2)
         drawz += sgndeltaz;
       }
       drawy += sgndeltay;
+      //Serial.println("Delta to move: " + String(deltaxabs) + "/" + String(n));
+      //Serial.println("Drawing: " + String(drawx) + ":" + String(drawy) + ":" + String(drawz));
       moveToXYZ(drawx, drawy, drawz);
     }
     return;
@@ -357,6 +362,7 @@ void lineXYZ(int x2, int y2, int z2)
   // dZ is biggest
   if(deltazabs >= deltaxabs && deltazabs >= deltayabs){
     for(n = 0; n < deltazabs; n++){
+      //Serial.println("Delta to move: " + String(deltaxabs) + " Current loop index: " + String(n));
       x += deltaxabs;
       if(x >= deltazabs){
         x -= deltazabs;
@@ -368,13 +374,15 @@ void lineXYZ(int x2, int y2, int z2)
         drawy += sgndeltay;
       }
       drawz += sgndeltaz;
+      //Serial.println("Delta to move: " + String(deltaxabs) + "/" + String(n));
+      //Serial.println("Drawing: " + String(drawx) + ":" + String(drawy) + ":" + String(drawz));
       moveToXYZ(drawx, drawy, drawz);
     }
     return;
   }
 }
 
-void drawline(int x1, int y1, int x2, int y2)
+void drawline(long x1, long y1, long x2, long y2)
 {
   penUp();
   lineXYZ(x1,y1,5);
@@ -385,19 +393,24 @@ void drawline(int x1, int y1, int x2, int y2)
 
 /* No direct use of step coordinates below this line */
 
-int convertPosX(float pos)
+long convertPosX(float pos)
 { 
-  return (int)(pos*conversionFactor*stepsPerMillimeter_X);
+  return (long)(pos*conversionFactor*stepsPerMillimeter_X);
 }
 
-int convertPosY(float pos)
+long convertPosY(float pos)
 { 
-  return (int)(pos*conversionFactor*stepsPerMillimeter_Y);
+  /*
+  Serial.println("The float value is: " + String(pos*conversionFactor*stepsPerMillimeter_Y));
+  Serial.println("The Integer value is: " + String((long(pos*conversionFactor*stepsPerMillimeter_Y))));
+  Serial.println("The implicit cast value is: " + String((long)(pos*conversionFactor*stepsPerMillimeter_Y)));
+  */
+  return (long)(pos*conversionFactor*stepsPerMillimeter_Y);
 }
 
-int convertPosZ(float pos)
+long convertPosZ(float pos)
 { 
-  return (int)(pos*conversionFactor*stepsPerMillimeter_Z);
+  return (long)(pos*conversionFactor*stepsPerMillimeter_Z);
 }
 
 void drawlinePos(float x1, float y1, float x2, float y2)
@@ -409,6 +422,10 @@ void drawlinePos(float x1, float y1, float x2, float y2)
 
 void linePos(float x2, float y2, float z2)
 {
+  /*
+  Serial.println("Absolute: " + String(x2) + ":" + String(y2) + ":" + String(z2));
+  Serial.println("Converted: " + String(convertPosX(x2)) + ":" + String(convertPosY(y2)) + ":" + String(convertPosZ(z2)));
+  */
   lineXYZ(convertPosX(x2),convertPosY(y2),convertPosZ(z2));
   posX=x2;
   posY=y2;

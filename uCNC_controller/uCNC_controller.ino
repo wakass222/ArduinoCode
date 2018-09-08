@@ -56,9 +56,9 @@ float servoPosZfactor=1.0;
 int   motorMode = 1;
 
 /* X,Y,Z in absolute steps position */
-int X = 0;
-int Y = 0;
-int Z = 0;
+long X = 0;
+long Y = 0;
+long Z = 0;
 
 /* X,Y,Z in measurement value*/
 float posX = 0.0;
@@ -103,6 +103,8 @@ void setup() {
 
   /* Init the steppers and servo */
   initMotors();
+
+  Serial.println("Ready");
 }
 
 void clear_command_string() {
