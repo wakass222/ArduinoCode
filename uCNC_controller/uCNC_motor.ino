@@ -62,7 +62,7 @@
               The functions are grouped into those using the native steps
               values or the measurement (float) values. */
 
-#define MAX_SPEED 10
+#define MAX_SPEED 4
 #define DRILL_SPEED 0.1
 
 float motorSpeed = MAX_SPEED;
@@ -74,23 +74,26 @@ void initMotors()
   //myStepper3.setSpeed(MAX_SPEED);
 
   myServo.attach(10);
-  myServo.write(servoPosMin);
 
   home();
 }
 
 void home()
 {
-  while(!digitalRead(switchOne)) {
+  myServo.write(servoPosMin);
+
+  while(!digitalRead(switchTwo)) {
     myStepper1.step(-1);
   }
 
-  while(!digitalRead(switchTwo)) {
+  while(!digitalRead(switchOne)) {
     myStepper2.step(-1);
   }
 
   myStepper1.step(100);
   myStepper2.step(100);
+
+  myServo.write(servoPosMax);
 }
 
 void setXYSpeed(float speed)
@@ -178,7 +181,7 @@ void servoZ()
 
 void moveZ(int dZ)
 {
-  Z = Z + dZ;  
+  Z = Z + dZ;
 
   switch(motorMode) {
   case 0:
@@ -311,9 +314,9 @@ void lineXYZ(int x2, int y2, int z2)
   drawx = X;
   drawy = Y;
   drawz = Z;
-  
+
   moveToXYZ(drawx, drawy, drawz);
-  
+
   // dX is biggest
   if(deltaxabs >= deltayabs && deltaxabs >= deltazabs){
     for(n = 0; n < deltaxabs; n++){

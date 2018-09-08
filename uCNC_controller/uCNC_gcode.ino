@@ -59,11 +59,11 @@ void process_command(uint8_t *command_string)
     code = getValue('G');
 
     switch(code) {
-    case 0: //Rapid Motion
+    case 00: //Rapid Motion
       setXYZ(&fp);
       movePosXYZ (fp.x, fp.y, fp.z, 0);
       break;
-    case 1: //Coordinated Motion
+    case 01: //Coordinated Motion
       setXYZ(&fp);
       if (command_exists('F')) _feedrate = getValue('F'); //feedrate persists till changed.
       movePosXYZ (fp.x, fp.y, fp.z, _feedrate);
@@ -79,7 +79,7 @@ void process_command(uint8_t *command_string)
       arcPos((code-2), fp.x, fp.y, fp.x+I, fp.y+J);
       break; 
 #endif /*BROKEN*/   
-    case 4: //Dwell
+    case 04: //Dwell
       delay((int)getValue('P'));
       break;
     case 20: //Inches for Units

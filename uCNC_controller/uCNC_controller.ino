@@ -33,21 +33,21 @@ float uCNC_Version = 1.1;
 
 /* Conversion factor of steps per millimeter */
 float stepsPerMillimeter_X = 2048 / threadPitch;
-float stepsPerMillimeter_Y = -2048 / threadPitch;
-float stepsPerMillimeter_Z = 2048 / threadPitch;
+float stepsPerMillimeter_Y = 2048 / threadPitch;
+float stepsPerMillimeter_Z = 1;
 
 /* Unit conversion factor */
 float conversionFactor = 1;  // 1 for mm 25.4 for inches
 
 /* Stepper library initialization */
 const int stepsPerRevolution = 2048;  // change this to fit the number of steps per revolution
-Stepper myStepper1(stepsPerRevolution, 4,5,2,3);
-Stepper myStepper2(stepsPerRevolution, 9,8,7,6);
+Stepper myStepper2(stepsPerRevolution, 4,5,2,3);
+Stepper myStepper1(stepsPerRevolution, 6,7,9,8);
 
 //Not being used
 //Stepper myStepper3(stepsPerRevolution, 17,16,19,18);
 
-int servoPosMax=55;
+int servoPosMax=65;
 int servoPosMin=25;
 int servoToolInc=10;
 float servoPosZfactor=1.0;
