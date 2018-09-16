@@ -35,7 +35,6 @@ float uCNC_Version = 1.1;
 float stepsPerMillimeter_X = 2048 / threadPitch;
 float stepsPerMillimeter_Y = 2048 / threadPitch;
 float stepsPerMillimeter_Z = 1;
-
 /* Unit conversion factor */
 float conversionFactor = 1;  // 1 for mm 25.4 for inches
 

@@ -395,16 +395,20 @@ void drawline(long x1, long y1, long x2, long y2)
 
 long convertPosX(float pos)
 { 
+  //Serial.println("The X float value is: " + String(pos*conversionFactor*stepsPerMillimeter_X));
+  //Serial.println("The X Integer value is: " + String((long(pos*conversionFactor*stepsPerMillimeter_X))));
+  //Serial.println("The X implicit cast value is: " + String((long)(pos*conversionFactor*stepsPerMillimeter_X)));
+
   return (long)(pos*conversionFactor*stepsPerMillimeter_X);
 }
 
 long convertPosY(float pos)
 { 
-  /*
-  Serial.println("The float value is: " + String(pos*conversionFactor*stepsPerMillimeter_Y));
-  Serial.println("The Integer value is: " + String((long(pos*conversionFactor*stepsPerMillimeter_Y))));
-  Serial.println("The implicit cast value is: " + String((long)(pos*conversionFactor*stepsPerMillimeter_Y)));
-  */
+  
+  //Serial.println("The Y float value is: " + String(pos*conversionFactor*stepsPerMillimeter_Y));
+  //Serial.println("The Y Integer value is: " + String((long(pos*conversionFactor*stepsPerMillimeter_Y))));
+  //Serial.println("The Y implicit cast value is: " + String((long)(pos*conversionFactor*stepsPerMillimeter_Y)));
+  
   return (long)(pos*conversionFactor*stepsPerMillimeter_Y);
 }
 
